@@ -1,26 +1,38 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-bg: oklch(0.17 0.01 240);
+  --color-bg-secondary: oklch(0.24 0.015 240);
+  --color-text: oklch(0.95 0 0);
+  --color-text-muted: oklch(0.75 0.01 260);
+  --color-primary: oklch(0.7 0.14 255);
+  --color-primary-hover: oklch(0.75 0.15 255);
+  --color-accent: oklch(0.85 0.09 25);
+  --color-border: oklch(0.3 0.01 240);
+
+  --font-outfit: "Outfit", sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  body {
+    @apply bg-bg text-text font-outfit tracking-tight overflow-x-hidden;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  html {
+    @apply scroll-smooth;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .flexItemsBetween {
+    @apply flex items-center justify-between;
+  }
+
+  .gridList {
+    @apply grid gap-[1.5rem];
+  }
+
+  .flexColumn {
+    @apply flex flex-col;
+  }
 }
