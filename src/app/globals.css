@@ -21,18 +21,8 @@
   html {
     @apply scroll-smooth;
   }
-}
 
-@layer components {
-  .flexItemsBetween {
-    @apply flex items-center justify-between;
-  }
-
-  .gridList {
-    @apply grid gap-[1.5rem];
-  }
-
-  .flexColumn {
-    @apply flex flex-col;
+  button {
+    @apply cursor-pointer;
   }
 }
