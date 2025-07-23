@@ -29,9 +29,9 @@ export default function Genres() {
       const data: GenresAPIResponse = await fetchGenres();
       setGenres(data.results);
     } catch (error: unknown) {
-      setError("Error fetching recipes. Please try again later.");
+      setError("Error fetching genres. Please try again later.");
       if (error instanceof Error) {
-        console.error("Error fetching recipes:", error.message);
+        console.error("Error fetching genres:", error.message);
       }
     } finally {
       setLoadingState(false);
@@ -43,7 +43,7 @@ export default function Genres() {
   }, []);
 
   return (
-    <section className="pt-10 overflow-hidden" aria-label="Categories Section">
+    <section className="pt-10 overflow-hidden" aria-label="Genres Section">
       <Container>
         {/*=========== Heading & Scroll Arrows ===========*/}
         <div className="flex items-center justify-between">

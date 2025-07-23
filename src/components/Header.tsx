@@ -80,7 +80,7 @@ export default function Header() {
 
   const links = [
     { name: "Home", href: "/" },
-    { name: "Top Categories", href: "/top-categories" },
+    { name: "Top Categories", href: "#top-5-genres" },
     { name: "Games", href: "/games" },
     { name: "Wishlist", href: "/wishlist" },
   ];
@@ -125,7 +125,7 @@ export default function Header() {
         </div>
 
         {/*=========== Searchbar & Header Actions ===========*/}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 lg:gap-0">
           {/*=========== Searchbar (desktop) ===========*/}
           <Searchbar />
 

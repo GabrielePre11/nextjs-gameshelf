@@ -37,7 +37,10 @@ export default function GameCard({ game }: { game: CompleteGame }) {
         </h3>
 
         {/*=========== Add to Wishlist ===========*/}
-        <button className="absolute lg:translate-y-10 lg:group-hover:-translate-y-1 grid left-1.5 bottom-1 place-items-center p-1.5 rounded-lg bg-bg-secondary border border-border transition-all duration-300 ease-in-out">
+        <button
+          className="absolute lg:translate-y-10 lg:group-hover:-translate-y-1 grid left-1.5 bottom-1 place-items-center p-1.5 rounded-lg bg-bg-secondary border border-border transition-all duration-300 ease-in-out"
+          aria-label="Add to Wishlist"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="20"

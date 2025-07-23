@@ -1,3 +1,4 @@
+import BentoGrid from "@/components/sections/BentoGrid";
 import Genres from "@/components/sections/Genres";
 import Hero from "@/components/sections/Hero";
 import PopularGames from "@/components/sections/PopularGames";
@@ -9,6 +10,7 @@ export default function page() {
       <Hero />
       <Genres />
       <PopularGames />
+      <BentoGrid />
     </>
   );
 }

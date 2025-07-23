@@ -4,7 +4,7 @@ import React from "react";
 
 export default function Hero() {
   return (
-    <section className="pt-20" aria-label="hero-section">
+    <section className="pt-24" aria-label="Hero Section">
       <Container>
         <Image
           src={"/Cyberpunk-Banner.jpg"}

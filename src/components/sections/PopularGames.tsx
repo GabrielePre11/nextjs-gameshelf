@@ -18,11 +18,10 @@ export default function PopularGames() {
 
       const data = await fetchGames("ordering=-added", 8);
       setPopularGames(data.results);
-      console.log(data);
     } catch (error: unknown) {
-      setError("Error fetching recipes. Please try again later.");
+      setError("Error fetching popular games. Please try again later.");
       if (error instanceof Error) {
-        console.error("Error fetching recipes:", error.message);
+        console.error("Error popular games:", error.message);
       }
     } finally {
       setLoadingState(false);
@@ -34,7 +33,7 @@ export default function PopularGames() {
   }, []);
 
   return (
-    <section className="py-10">
+    <section className="pt-10" aria-label="Popular Games Section">
       <Container>
         {/*=========== Heading ===========*/}
         <h3 className="text-2xl font-medium">Popular Games</h3>
