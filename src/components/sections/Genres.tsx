@@ -6,6 +6,7 @@ import { Genre } from "@/types/genre";
 import { GenresAPIResponse } from "@/types/genres_api";
 import React, { useEffect, useState, useRef } from "react";
 import GenreCard from "../GenreCard";
+import Loader from "../Loader";
 
 export default function Genres() {
   const [genres, setGenres] = useState<Genre[] | null>(null);
@@ -27,7 +28,6 @@ export default function Genres() {
 
       const data: GenresAPIResponse = await fetchGenres();
       setGenres(data.results);
-      console.log(data);
     } catch (error: unknown) {
       setError("Error fetching recipes. Please try again later.");
       if (error instanceof Error) {
@@ -43,7 +43,7 @@ export default function Genres() {
   }, []);
 
   return (
-    <section className="py-8 overflow-hidden" aria-label="Categories Section">
+    <section className="pt-10 overflow-hidden" aria-label="Categories Section">
       <Container>
         {/*=========== Heading & Scroll Arrows ===========*/}
         <div className="flex items-center justify-between">
@@ -100,17 +100,22 @@ export default function Genres() {
           </div>
         </div>
 
+        {/*=========== Loading State ===========*/}
+        {loadingState && <Loader />}
+
         {/*=========== Categories ===========*/}
-        <ul
-          className="flex items-center mt-6 overflow-x-auto space-x-5 scrollbar-hidden"
-          ref={genresScrollRef}
-        >
-          {genres?.map((genre) => (
-            <li key={genre.id} className="shrink-0">
-              <GenreCard genre={genre} />
-            </li>
-          ))}
-        </ul>
+        {!error && !loadingState && genres && (
+          <ul
+            className="flex items-center mt-6 overflow-x-auto space-x-5 scrollbar-hidden"
+            ref={genresScrollRef}
+          >
+            {genres?.map((genre) => (
+              <li key={genre.id} className="shrink-0">
+                <GenreCard genre={genre} />
+              </li>
+            ))}
+          </ul>
+        )}
       </Container>
     </section>
   );
