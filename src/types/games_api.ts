@@ -1,6 +1,6 @@
 import { CompleteGame } from "./complete_game";
 
-interface GamesApiResponse {
+export interface GamesApiResponse {
   count: number;
   next: string | null;
   previous: string | null;

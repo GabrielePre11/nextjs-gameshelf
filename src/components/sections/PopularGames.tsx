@@ -6,6 +6,7 @@ import Loader from "../Loader";
 import { fetchGames } from "@/lib/fetchGames";
 import { CompleteGame } from "@/types/complete_game";
 import GameCard from "../GameCard";
+import { GamesApiResponse } from "@/types/games_api";
 
 export default function PopularGames() {
   const [popularGames, setPopularGames] = useState<CompleteGame[] | null>(null);
@@ -16,7 +17,7 @@ export default function PopularGames() {
     try {
       setLoadingState(true);
 
-      const data = await fetchGames("ordering=-added", 8);
+      const data: GamesApiResponse = await fetchGames("ordering=-added", 8);
       setPopularGames(data.results);
     } catch (error: unknown) {
       setError("Error fetching popular games. Please try again later.");
