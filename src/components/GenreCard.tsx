@@ -5,7 +5,7 @@ import React from "react";
 
 export default function GenreCard({ genre }: { genre: Genre }) {
   return (
-    <Link href={`/genres/${genre.id}`}>
+    <Link href={`/genres/${genre.slug}`}>
       <article className="flex flex-col cursor-pointer">
         {/*=========== Genre's Cover ===========*/}
         <figure className="rounded-tl-lg rounded-tr-lg overflow-hidden">
