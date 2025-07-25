@@ -108,8 +108,25 @@ export default function Games() {
             onFilterChange={handleFilterChange}
           />
 
+          {/*========= Error State =========*/}
+          {error && (
+            <div className="grid place-items-center mt-20">
+              <h2 className="text-2xl font-semibold text-red-600">{error}</h2>
+              <p className="text-gray-500 mt-2">
+                Please try again later or contact support.
+              </p>
+            </div>
+          )}
+
           {/*=========== Loading State ===========*/}
           {loadingState && <Loader />}
+
+          {/*========= No Games Found =========*/}
+          {!error && !loadingState && games.length < 1 && (
+            <div className="grid place-items-center mt-20">
+              <p className="text-gray-500 mt-2">No games were found.</p>
+            </div>
+          )}
 
           {/*=========== Games ===========*/}
           {!error && !loadingState && games && (

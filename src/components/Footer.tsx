@@ -96,7 +96,7 @@ const footerLinks = [
     title: "Navigation",
     links: [
       { name: "Home", href: "/" },
-      { name: "Top 5 Genres", href: "#top-5-genres" },
+      { name: "Top 5 Genres", href: "/#top-5-genres" },
       { name: "Games", href: "/games" },
       { name: "Wishlist", href: "/wishlist" },
     ],
@@ -199,7 +199,7 @@ export default function Footer() {
         {/*=========== Footer Bottom ===========*/}
         <div className="flex items-center flex-wrap justify-between gap-2 border-t-2 border-zinc-400 mt-5 py-5 text-[1rem] md:text-lg lg:text-xl text-muted">
           {/*=========== Copyright ===========*/}
-          <p>{`© ${currentYear.getFullYear()} Library Game Hub. All rights reserved.`}</p>
+          <p>{`© ${currentYear.getFullYear()} GameShelf. All rights reserved.`}</p>
 
           {/*=========== Author ===========*/}
           <p className="flex items-center gap-1">

@@ -6,7 +6,9 @@ export async function fetchTopGenres() {
     const response = await fetch(url);
 
     if (!response.ok) {
-      throw new Error(`There was an error fetching games: ${response.status}`);
+      throw new Error(
+        `There was an error fetching top genres: ${response.status}`
+      );
     }
 
     const data = await response.json();
@@ -18,6 +20,6 @@ export async function fetchTopGenres() {
 
     return topGenres.slice(0, 5);
   } catch (error: unknown) {
-    console.error("Error fetching games:", error);
+    console.error("Error fetching top genres:", error);
   }
 }
