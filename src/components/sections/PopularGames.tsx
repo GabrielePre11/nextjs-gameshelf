@@ -17,7 +17,12 @@ export default function PopularGames() {
     try {
       setLoadingState(true);
 
-      const data: GamesApiResponse = await fetchGames("ordering=-added", 8);
+      const data: GamesApiResponse = await fetchGames({
+        page: 1,
+        pageSize: 8,
+        filters: {},
+        ordering: "-added",
+      });
       setPopularGames(data.results);
     } catch (error: unknown) {
       setError("Error fetching popular games. Please try again later.");

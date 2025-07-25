@@ -8,12 +8,8 @@ type FiltersProps = {
     platform: string[];
     genre: string[];
     tag: string[];
-    rating: string[];
   };
-  onFilterChange: (
-    type: "platform" | "genre" | "tag" | "rating",
-    value: string
-  ) => void;
+  onFilterChange: (type: "platform" | "genre" | "tag", value: string) => void;
 };
 
 export default function Filters({ filters, onFilterChange }: FiltersProps) {
@@ -59,22 +55,10 @@ export default function Filters({ filters, onFilterChange }: FiltersProps) {
         { id: "multiplayer", label: "Multiplayer" },
       ],
     },
-
-    {
-      id: "ratings",
-      title: "Ratings",
-      type: "rating",
-      options: [
-        { id: "5-stars", label: "5 ⭐⭐⭐⭐⭐" },
-        { id: "4-stars", label: "4 ⭐⭐⭐⭐" },
-        { id: "3-stars", label: "3 ⭐⭐⭐" },
-        { id: "2-stars", label: "2 ⭐⭐" },
-        { id: "1-star", label: "1 ⭐" },
-      ],
-    },
   ];
 
   const [isExpanded, setIsExpanded] = useState<{ [key: string]: boolean }>({});
+  const [filtersOpen, setFiltersOpen] = useState(true);
   const maxOptionsNumber = 5;
 
   const toggleExpanded = (filterId: string) => {
@@ -85,13 +69,46 @@ export default function Filters({ filters, onFilterChange }: FiltersProps) {
   };
 
   return (
-    <aside className="flex flex-col place-items-start lg:border-r-2 lg:border-border">
+    <aside className="flex flex-col place-items-start lg:border-r-2 lg:border-border overflow-hidden">
       {/*========= Header =========*/}
       <header className="flex items-center justify-between w-full lg:pr-4.5">
-        <h2 className="font-medium text-2xl">Filters</h2>
+        <h2 className="flex items-center gap-2 font-medium text-2xl">
+          <span
+            className="grid place-items-center p-1.5 bg-bg border border-border rounded-lg transition-colors duration-300 hover:bg-bg/60"
+            aria-label="Filters Icon"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="lucide lucide-sliders-horizontal-icon lucide-sliders-horizontal"
+            >
+              <line x1="21" x2="14" y1="4" y2="4" />
+              <line x1="10" x2="3" y1="4" y2="4" />
+              <line x1="21" x2="12" y1="12" y2="12" />
+              <line x1="8" x2="3" y1="12" y2="12" />
+              <line x1="21" x2="16" y1="20" y2="20" />
+              <line x1="12" x2="3" y1="20" y2="20" />
+              <line x1="14" x2="14" y1="2" y2="6" />
+              <line x1="8" x2="8" y1="10" y2="14" />
+              <line x1="16" x2="16" y1="18" y2="22" />
+            </svg>
+          </span>
+          Filters
+        </h2>
 
         {/*========= Close Filters =========*/}
-        <button className="grid place-items-center p-1.5 bg-bg border border-border rounded-lg transition-colors duration-300 hover:bg-bg/60">
+        <button
+          className="grid place-items-center p-1.5 bg-bg border border-border rounded-lg transition-colors duration-300 hover:bg-bg-secondary/30"
+          aria-label={`${filtersOpen ? "Hide Filters" : "Show Filters"}`}
+          onClick={() => setFiltersOpen((prev) => !prev)}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="20"
@@ -102,23 +119,21 @@ export default function Filters({ filters, onFilterChange }: FiltersProps) {
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className="lucide lucide-sliders-horizontal-icon lucide-sliders-horizontal"
+            className={`lucide lucide-chevron-down-icon lucide-chevron-down transition duration-200 ${
+              !filtersOpen ? "rotate-90" : ""
+            }`}
           >
-            <line x1="21" x2="14" y1="4" y2="4" />
-            <line x1="10" x2="3" y1="4" y2="4" />
-            <line x1="21" x2="12" y1="12" y2="12" />
-            <line x1="8" x2="3" y1="12" y2="12" />
-            <line x1="21" x2="16" y1="20" y2="20" />
-            <line x1="12" x2="3" y1="20" y2="20" />
-            <line x1="14" x2="14" y1="2" y2="6" />
-            <line x1="8" x2="8" y1="10" y2="14" />
-            <line x1="16" x2="16" y1="18" y2="22" />
+            <path d="m6 9 6 6 6-6" />
           </svg>
         </button>
       </header>
 
       {/*========= Filters =========*/}
-      <ul className="grid grid-cols-1 gap-4 mt-3">
+      <ul
+        className={`grid-cols-1 gap-4 mt-3 transform transition-transform duration-200 ease-in-out ${
+          !filtersOpen ? "hidden opacity-0" : "grid opacity-100 visible"
+        }`}
+      >
         {filterConfig.map((filter) => {
           const visibleOptions = isExpanded[filter.id]
             ? filter.options
