@@ -16,24 +16,24 @@ export default function GamePage({
   const [loadingState, setLoadingState] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  const getGame = async () => {
-    try {
-      setLoadingState(true);
-      const { slug } = await params;
-
-      const data = await fetchGame(slug);
-      setGame(data);
-    } catch (error: unknown) {
-      setError("Error fetching games. Please try again later.");
-      if (error instanceof Error) {
-        console.error("Error games:", error.message);
-      }
-    } finally {
-      setLoadingState(false);
-    }
-  };
-
   useEffect(() => {
+    const getGame = async () => {
+      try {
+        setLoadingState(true);
+        const { slug } = await params;
+
+        const data = await fetchGame(slug);
+        setGame(data);
+      } catch (error: unknown) {
+        setError("Error fetching games. Please try again later.");
+        if (error instanceof Error) {
+          console.error("Error games:", error.message);
+        }
+      } finally {
+        setLoadingState(false);
+      }
+    };
+
     getGame();
   }, [params]);
 

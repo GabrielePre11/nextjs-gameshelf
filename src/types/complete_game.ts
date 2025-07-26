@@ -31,8 +31,8 @@ export interface CompleteGame {
   stores: { store: { id: number; name: string; slug: string } }[];
   suggestions_count: number;
   updated: string;
-  user_game: any | null;
-  clip: any | null;
+  user_game: unknown | null;
+  clip: unknown | null;
   nofollow: boolean;
   nofollow_collections: string[];
   noindex: boolean;

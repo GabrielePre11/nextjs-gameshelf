@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useCallback } from "react";
 import { fetchGenre } from "@/lib/fetchGenre";
 import { useEffect, useState } from "react";
 import Container from "@/layout/Container";
@@ -23,44 +23,41 @@ export default function GenrePage({
   const [error, setError] = useState<string | null>(null);
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const getGenre = async () => {
+  const getGenre = useCallback(async () => {
     try {
       setLoadingState(true);
-      const { slug } = await params;
 
+      const { slug } = await params;
       const data: DetailedGenreResponse = await fetchGenre(slug);
       setGenre(data);
     } catch (error: unknown) {
       setError("Error fetching games. Please try again later.");
-      if (error instanceof Error) {
-        console.error("Error games:", error.message);
-      }
+      if (error instanceof Error) console.error("Error games:", error.message);
     } finally {
       setLoadingState(false);
     }
-  };
+  }, [params]);
 
-  const getGenreGames = async () => {
+  const getGenreGames = useCallback(async () => {
     try {
       setLoadingState(true);
-      const { slug } = await params;
 
+      const { slug } = await params;
       const data: GameSeriesResponse = await fetchGenreGames(slug);
       setGenreGames(data.results);
     } catch (error: unknown) {
       setError("Error fetching games. Please try again later.");
-      if (error instanceof Error) {
+      if (error instanceof Error)
         console.error("Error fetching games:", error.message);
-      }
     } finally {
       setLoadingState(false);
     }
-  };
+  }, [params]);
 
   useEffect(() => {
     getGenre();
     getGenreGames();
-  }, [params]);
+  }, [params, getGenre, getGenreGames]);
 
   function stripHtml(html: string) {
     return html.replace(/<[^>]+>/g, "");

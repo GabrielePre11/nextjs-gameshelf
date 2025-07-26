@@ -7,7 +7,7 @@ import { GameSeriesResponse } from "@/types/game_series_api";
 import { ScreenshotType } from "@/types/screenshot";
 import { ScreenshotsApiResponse } from "@/types/screenshots_api";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import GameCard from "./GameCard";
 import { CompleteGame } from "@/types/complete_game";
 import Loader from "./Loader";
@@ -21,7 +21,7 @@ export default function DetailedGame({ game }: { game: DetailedGameType }) {
   const [loadingState, setLoadingState] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  const getGameScreenshots = async () => {
+  const getGameScreenshots = useCallback(async () => {
     try {
       setLoadingState(true);
 
@@ -35,9 +35,9 @@ export default function DetailedGame({ game }: { game: DetailedGameType }) {
     } finally {
       setLoadingState(false);
     }
-  };
+  }, [game.slug]);
 
-  const getMoreFromTheSeries = async () => {
+  const getMoreFromTheSeries = useCallback(async () => {
     try {
       setLoadingState(true);
 
@@ -51,12 +51,12 @@ export default function DetailedGame({ game }: { game: DetailedGameType }) {
     } finally {
       setLoadingState(false);
     }
-  };
+  }, [game.slug]);
 
   useEffect(() => {
     getGameScreenshots();
     getMoreFromTheSeries();
-  }, []);
+  }, [getGameScreenshots, getMoreFromTheSeries]);
 
   return (
     <>

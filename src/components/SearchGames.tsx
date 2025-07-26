@@ -23,23 +23,23 @@ export default function SearchGames() {
   // This will be used to fetch the games based on the user's search input.
   const userQuery = searchParams.get("q");
 
-  const fetchSearchedGames = async () => {
-    try {
-      setLoadingState(true);
-
-      const data: GameSeriesResponse = await fetchSearch(userQuery ?? "");
-      setSearchedGames(data.results);
-    } catch (error: unknown) {
-      setError("Error fetching games. Please try again later.");
-      if (error instanceof Error) {
-        console.error("Error games:", error.message);
-      }
-    } finally {
-      setLoadingState(false);
-    }
-  };
-
   useEffect(() => {
+    const fetchSearchedGames = async () => {
+      try {
+        setLoadingState(true);
+
+        const data: GameSeriesResponse = await fetchSearch(userQuery ?? "");
+        setSearchedGames(data.results);
+      } catch (error: unknown) {
+        setError("Error fetching games. Please try again later.");
+        if (error instanceof Error) {
+          console.error("Error games:", error.message);
+        }
+      } finally {
+        setLoadingState(false);
+      }
+    };
+
     fetchSearchedGames();
   }, [userQuery]);
 
@@ -63,7 +63,7 @@ export default function SearchGames() {
         <div className="flex flex-col gap-2">
           {/*=========== Title ===========*/}
           <h3 className="inline-flex items-center gap-2 text-2xl md:text-3xl">
-            You've searched for:{" "}
+            You&apos;ve searched for:{" "}
             <em className="flex text-lg md:text-xl text-primary">
               {userQuery}
             </em>

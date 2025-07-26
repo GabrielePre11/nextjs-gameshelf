@@ -54,7 +54,7 @@ export default function Games() {
     []
   );
 
-  const getGames = async () => {
+  const getGames = useCallback(async () => {
     try {
       setLoadingState(true);
 
@@ -69,7 +69,7 @@ export default function Games() {
       });
 
       setGames((prev) => {
-        // Avoid duplicates
+        // Avoid duplicates by checking existing game IDs
         const existingGames = new Set(prev.map((game) => game.id));
 
         const newGames = data.results.filter(
@@ -87,7 +87,7 @@ export default function Games() {
     } finally {
       setLoadingState(false);
     }
-  };
+  }, [page, selectedFilters]);
 
   // Reset games and page number whenever the filters change
   useEffect(() => {
@@ -99,7 +99,7 @@ export default function Games() {
   // Fetch games when page number or filters change
   useEffect(() => {
     getGames();
-  }, [page, selectedFilters]);
+  }, [page, selectedFilters, getGames]);
 
   // Load more games (pagination)
   const loadMoreGames = useCallback(() => {

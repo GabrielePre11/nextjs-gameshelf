@@ -76,8 +76,6 @@ interface Developer {
   image_background?: string;
 }
 
-interface Publisher extends Developer {}
-
 interface Genre {
   id: number;
   name: string;
@@ -127,7 +125,7 @@ export interface DetailedGameType {
   metacritic_url?: string;
   esrb_rating?: ESRBRating;
   developers: Developer[];
-  publishers: Publisher[];
+  publishers: unknown[]; // RAWG sometimes has publishers, but not always
   genres: Genre[];
   tags: Tag[];
   saturated_color?: string;
@@ -147,5 +145,5 @@ export interface DetailedGameType {
   reviews_count: number;
   reviews_text_count?: number;
   tba?: boolean;
-  user_game?: any;
+  user_game?: unknown;
 }
