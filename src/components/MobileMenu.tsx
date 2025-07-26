@@ -1,6 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 import { usePathname } from "next/navigation";
 
 export default function MobileMenu({
@@ -20,6 +22,16 @@ export default function MobileMenu({
   const closeMenuOnClick = () => {
     setIsMenuOpen(false);
   };
+
+  //========= Close the mobile navbar on scroll =========//
+  const closeSearchOnScroll = useCallback(() => {
+    setIsMenuOpen(false);
+  }, [setIsMenuOpen]);
+
+  useEffect(() => {
+    window.addEventListener("scroll", closeSearchOnScroll);
+    return () => window.removeEventListener("scroll", closeSearchOnScroll);
+  }, [closeSearchOnScroll]);
 
   return (
     <nav className="fixed lg:hidden inset-0 h-screen bg-bg-secondary z-30 overflow-hidden">

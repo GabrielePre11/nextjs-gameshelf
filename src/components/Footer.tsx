@@ -214,14 +214,26 @@ export default function Footer() {
           </p>
 
           {/*=========== Terms of Service & Privacy Policy ===========*/}
-          <ul className="flex items-center gap-3">
-            <li className="hover:underline">
-              <a href="/terms">Terms of Service</a>
-            </li>
-            <li className="hover:underline">
-              <a href="/privacy">Privacy Policy</a>
-            </li>
-          </ul>
+          <div className="flex items-center gap-1.5">
+            <p className="flex items-center gap-2 text-text-muted">
+              Powered by
+              <a
+                href="https://rawg.io/"
+                className="text-primary"
+                target="_blank"
+              >
+                RAWG
+              </a>
+            </p>
+            <Image
+              src={"/rawg-logo.jpg"}
+              alt="RAWG Logo"
+              width={100}
+              height={100}
+              loading="lazy"
+              className="size-10 objcect-contain aspect-square rounded-lg border border-border transition-all duration-300 hover:scale-105 hover:brightness-105"
+            ></Image>
+          </div>
         </div>
       </Container>
     </footer>

@@ -12,6 +12,7 @@ export default function Hero() {
           width={1000}
           height={1000}
           className="w-full aspect-video sm:aspect-auto object-cover object-left rounded-lg"
+          priority={true}
         ></Image>
       </Container>
     </section>

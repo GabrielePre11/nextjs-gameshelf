@@ -11,13 +11,22 @@ import { GamesApiResponse } from "@/types/games_api";
 import Filters from "../Filters";
 
 export default function Games() {
+  // List of games to display
   const [games, setGames] = useState<CompleteGame[]>([]);
+
+  // State for showing loading spinner
   const [loadingState, setLoadingState] = useState<boolean>(false);
+
+  // State for error messages
   const [error, setError] = useState<string | null>(null);
+
+  // Indicates whether there are more pages to load
   const [hasMorePages, setHasMorePages] = useState(true);
+
+  // Current pagination page
   const [page, setPage] = useState<number>(1);
 
-  //=========== Filters ===========//
+  // Filters selected by the user
   const [selectedFilters, setSelectedFilters] = useState<{
     platform: string[];
     genre: string[];
@@ -60,6 +69,7 @@ export default function Games() {
       });
 
       setGames((prev) => {
+        // Avoid duplicates
         const existingGames = new Set(prev.map((game) => game.id));
 
         const newGames = data.results.filter(
@@ -79,17 +89,19 @@ export default function Games() {
     }
   };
 
-  // Resets Games when any filter changes
+  // Reset games and page number whenever the filters change
   useEffect(() => {
     setGames([]);
     setPage(1);
     setHasMorePages(true);
   }, [selectedFilters]);
 
+  // Fetch games when page number or filters change
   useEffect(() => {
     getGames();
   }, [page, selectedFilters]);
 
+  // Load more games (pagination)
   const loadMoreGames = useCallback(() => {
     setLoadingState(true);
     setPage((prev) => prev + 1);
