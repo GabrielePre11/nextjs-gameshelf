@@ -215,7 +215,7 @@ export default function DetailedGame({ game }: { game: DetailedGameType }) {
             <a
               href={game.website}
               target="_blank"
-              className="text-text-muted underline"
+              className="text-text-muted truncate underline"
             >
               {game.website}
             </a>

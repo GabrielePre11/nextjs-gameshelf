@@ -1,11 +1,38 @@
-import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import React, { useCallback, useEffect, useState } from "react";
 
 export default function MobileSearch({
   isSearchOpen,
+  setIsSearchOpen,
 }: {
   isSearchOpen: boolean;
+  setIsSearchOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const [userQuery, setUserQuery] = useState<string>("");
+
+  //========= Router from next/navigation =========//
+  const router = useRouter();
+
+  //========= Close the mobile navbar on scroll =========//
+  const closeSearchOnScroll = useCallback(() => {
+    setIsSearchOpen(false);
+  }, [setIsSearchOpen]);
+
+  useEffect(() => {
+    window.addEventListener("scroll", closeSearchOnScroll);
+    return () => window.removeEventListener("scroll", closeSearchOnScroll);
+  }, [closeSearchOnScroll]);
+
+  //========= Search Function =========//
+  const handleSearch = () => {
+    const query = userQuery.trim().toLowerCase();
+
+    if (!query) return;
+
+    setIsSearchOpen(false);
+    setUserQuery("");
+    router.push(`/search?q=${encodeURIComponent(query)}`);
+  };
 
   return (
     <form
@@ -23,6 +50,7 @@ export default function MobileSearch({
         className="relative text-lg outline-0 border-b border-zinc-400 pl-4 pr-28 py-3 w-full max-w-6xl mx-auto"
         value={userQuery}
         onChange={(e) => setUserQuery(e.target.value)}
+        onKeyDown={(e) => e.key === "Enter" && handleSearch()}
       />
 
       <button

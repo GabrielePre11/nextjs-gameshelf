@@ -80,7 +80,7 @@ export default function Header() {
 
   const links = [
     { name: "Home", href: "/" },
-    { name: "Top Categories", href: "#top-5-genres" },
+    { name: "Genres", href: "/#top-5-genres" },
     { name: "Games", href: "/games" },
     { name: "Wishlist", href: "/wishlist" },
   ];
@@ -153,7 +153,12 @@ export default function Header() {
         </div>
 
         {/*=========== MobileSearch Component ===========*/}
-        {<MobileSearch isSearchOpen={isSearchOpen} />}
+        {
+          <MobileSearch
+            isSearchOpen={isSearchOpen}
+            setIsSearchOpen={setIsSearchOpen}
+          />
+        }
 
         {/*=========== MobileMenu Component ===========*/}
         {isMenuOpen && <MobileMenu setIsMenuOpen={setIsMenuOpen} />}

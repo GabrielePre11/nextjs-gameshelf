@@ -10,7 +10,7 @@ export default function MobileMenu({
 }) {
   const links = [
     { name: "Home", href: "/" },
-    { name: "Top Categories", href: "/top-categories" },
+    { name: "Genres", href: "/#top-5-categories" },
     { name: "Games", href: "/games" },
     { name: "Wishlist", href: "/wishlist" },
   ];

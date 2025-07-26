@@ -10,7 +10,7 @@ export default function GameCard({ game }: { game: CompleteGame }) {
         {/*=========== Game's Cover ===========*/}
         <figure className="relative rounded-tl-lg rounded-tr-lg overflow-hidden">
           <Image
-            src={`${game.background_image}`}
+            src={`${game.background_image ?? "/imageNotFound.jpg"}`}
             alt={`${game.name}'s Background Image`}
             width={1000}
             height={1000}

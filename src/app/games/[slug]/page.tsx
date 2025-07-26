@@ -23,7 +23,6 @@ export default function GamePage({
 
       const data = await fetchGame(slug);
       setGame(data);
-      console.log(data);
     } catch (error: unknown) {
       setError("Error fetching games. Please try again later.");
       if (error instanceof Error) {
@@ -54,7 +53,7 @@ export default function GamePage({
         {/*=========== Loading State ===========*/}
         {loadingState && <Loader />}
 
-        {/*=========== Image Background, Rating & Title ===========*/}
+        {/*=========== DetailedGame Component ===========*/}
         {!error && !loadingState && game && (
           <DetailedGame key={game.id} game={game} />
         )}
