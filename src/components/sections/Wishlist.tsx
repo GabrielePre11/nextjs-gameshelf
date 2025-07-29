@@ -5,6 +5,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import GameCard from "../GameCard";
+import Image from "next/image";
 
 export default function Wishlist() {
   const favorites = useSelector(
@@ -18,6 +19,22 @@ export default function Wishlist() {
           Your Wishlist:{" "}
           <span className="text-3xl text-primary">{favorites.length}</span>
         </h2>
+
+        {/* No Favorites */}
+        {favorites.length === 0 && (
+          <figure className="grid place-items-center my-10">
+            <Image
+              src={"/empty.svg"}
+              alt="No Games added in Wishlist"
+              width={500}
+              height={500}
+            ></Image>
+
+            <p className="sm:text-lg text-center text-text-muted pt-5">
+              No games added to Wishlist yet!
+            </p>
+          </figure>
+        )}
 
         {/*========== Wishlist ==========*/}
         {favorites && (

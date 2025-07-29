@@ -36,3 +36,8 @@
 .scrollbar-hidden::-webkit-scrollbar {
   display: none;
 }
+
+.cl-avatarBox {
+  width: 2rem !important;
+  height: 2rem !important;
+}

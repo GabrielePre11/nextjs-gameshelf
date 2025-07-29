@@ -8,6 +8,14 @@ import React, { useState } from "react";
 import MobileSearch from "./MobileSearch";
 import MobileMenu from "./MobileMenu";
 import Searchbar from "./Searchbar";
+import {
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  SignUpButton,
+  UserButton,
+  UserProfile,
+} from "@clerk/nextjs";
 
 export default function Header() {
   const headerActions = [
@@ -129,6 +137,19 @@ export default function Header() {
           {/*=========== Searchbar (desktop) ===========*/}
           <Searchbar />
 
+          {/*=========== Clerk Signed In ===========*/}
+          <SignedIn>
+            <div className="grid place-items-center lg:pl-3">
+              <UserButton
+                appearance={{
+                  elements: {
+                    avatarBox: "border border-border rounded-full",
+                  },
+                }}
+              />
+            </div>
+          </SignedIn>
+
           {/*=========== Header Actions ===========*/}
           <div className="flex items-center gap-2.5">
             {headerActions.map((button) => (
@@ -150,6 +171,18 @@ export default function Header() {
               </button>
             ))}
           </div>
+
+          {/*=========== Clerk Signed Out ===========*/}
+          <SignedOut>
+            <div className="hidden sm:flex items-center gap-2 lg:pl-3">
+              {/*=========== Sign Up Button ===========*/}
+              <SignUpButton mode="modal">
+                <button className="grid place-items-center bg-bg px-3 py-1 border border-border rounded-lg transition-colors duration-200 hover:bg-bg/50">
+                  Sign Up
+                </button>
+              </SignUpButton>
+            </div>
+          </SignedOut>
         </div>
 
         {/*=========== MobileSearch Component ===========*/}
