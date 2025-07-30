@@ -168,6 +168,8 @@ export default function Footer() {
                     href={network.href}
                     target="_blank"
                     className="grid place-items-center p-1.5 bg-bg border border-border rounded-lg transition-colors duration-300 hover:bg-bg/60"
+                    aria-label={`${network.name} Icon`}
+                    role="link"
                   >
                     {network.svg}
                   </a>

@@ -18,16 +18,22 @@ export default function Wishlist() {
   useEffect(() => {
     if (!isSignedIn) {
       document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
     }
+    return () => {
+      document.body.style.overflow = "auto";
+    };
   }, [isSignedIn]);
 
   return (
     <section className="pt-20" aria-label="Wishlist">
       <Container>
         {!isSignedIn && (
-          <div className="fixed grid place-items-center min-h-dvh inset-0 bg-black/50 backdrop-blur-sm z-40">
+          <div
+            className="fixed grid place-items-center min-h-dvh inset-0 bg-black/50 backdrop-blur-sm z-40"
+            aria-label="Access Required Modal"
+            role="dialog"
+            aria-modal="true"
+          >
             <div className="fixed flex flex-col gap-2 text-center border-2 border-border rounded-lg z-50 p-4 sm:p-8 bg-bg-secondary">
               {/*=========== Title & Homepage ===========*/}
               <div className="flex items-center justify-between gap-2 sm:gap-5">
@@ -37,6 +43,9 @@ export default function Wishlist() {
                 <Link
                   href={"/"}
                   className="flex items-center gap-1 bg-bg px-3 py-1 rounded-lg border border-border transition-colors duration-300 hover:bg-bg/50"
+                  onClick={() => {
+                    document.body.style.overflow = "auto";
+                  }}
                 >
                   <span className="text-sm">Go Back To</span>
                   <svg
@@ -68,7 +77,6 @@ export default function Wishlist() {
                 alt="Sign Up"
                 width={100}
                 height={100}
-                loading="lazy"
                 className="size-56 place-self-center drop-shadow-[0_0_10px_rgba(0,0,0,0.5)]"
               ></Image>
 
