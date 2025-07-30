@@ -32,7 +32,6 @@ export default function GameCard({ game }: { game: CompleteGame }) {
 
   return (
     <>
-      {" "}
       <article className="relative flex flex-col group overflow-hidden">
         {/*=========== Game's Cover ===========*/}
         <Link href={`/games/${game.slug}`}>

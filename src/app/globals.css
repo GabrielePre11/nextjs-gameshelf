@@ -37,7 +37,21 @@
   display: none;
 }
 
+/* Clerk Component */
 .cl-avatarBox {
   width: 2rem !important;
   height: 2rem !important;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
 }

@@ -4,18 +4,11 @@ import Container from "@/layout/Container";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MobileSearch from "./MobileSearch";
 import MobileMenu from "./MobileMenu";
 import Searchbar from "./Searchbar";
-import {
-  SignedIn,
-  SignedOut,
-  SignInButton,
-  SignUpButton,
-  UserButton,
-  UserProfile,
-} from "@clerk/nextjs";
+import { SignedIn, SignedOut, SignUpButton, UserButton } from "@clerk/nextjs";
 
 export default function Header() {
   const headerActions = [
@@ -96,10 +89,30 @@ export default function Header() {
   /*=========== States ===========*/
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [headerScrolled, setIsHeaderScolled] = useState(false);
   const pathName = usePathname();
 
+  useEffect(() => {
+    const handleHeaderScroll = () => {
+      if (window.scrollY > 50) {
+        setIsHeaderScolled(true);
+      } else {
+        setIsHeaderScolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleHeaderScroll);
+    return () => {
+      window.removeEventListener("scroll", handleHeaderScroll);
+    };
+  }, [headerScrolled]);
+
   return (
-    <header className="fixed top-0 left-0 bg-bg-secondary w-full z-10">
+    <header
+      className={`fixed top-0 left-0 bg-bg-secondary w-full z-10 ${
+        headerScrolled ? "shadow-lg shadow-primary/20" : "shadow-none"
+      }`}
+    >
       <Container className="flex items-center justify-between py-2">
         {/*=========== Logo & Navigation (desktop) ===========*/}
         <div className="flex items-center gap-10">
@@ -152,6 +165,28 @@ export default function Header() {
 
           {/*=========== Header Actions ===========*/}
           <div className="flex items-center gap-2.5">
+            {/*=========== Sign Up Button (Mobile) ===========*/}
+            <SignUpButton mode="modal">
+              <button className="grid sm:hidden place-items-center p-1.5 bg-bg border border-border rounded-lg transition-all duration-200 hover:bg-bg/50 ease-in-out">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="lucide lucide-log-in-icon lucide-log-in"
+                >
+                  <path d="m10 17 5-5-5-5" />
+                  <path d="M15 12H3" />
+                  <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+                </svg>
+              </button>
+            </SignUpButton>
+
             {headerActions.map((button) => (
               <button
                 key={button.label}
@@ -175,7 +210,7 @@ export default function Header() {
           {/*=========== Clerk Signed Out ===========*/}
           <SignedOut>
             <div className="hidden sm:flex items-center gap-2 lg:pl-3">
-              {/*=========== Sign Up Button ===========*/}
+              {/*=========== Sign Up Button (sm - md - lg) ===========*/}
               <SignUpButton mode="modal">
                 <button className="grid place-items-center bg-bg px-3 py-1 border border-border rounded-lg transition-colors duration-200 hover:bg-bg/50">
                   Sign Up

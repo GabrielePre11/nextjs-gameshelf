@@ -38,24 +38,24 @@ export default function BentoGrid() {
       id="top-5-genres"
       aria-label="Top 5 Genres BentoGrid"
     >
-      <Container>
-        {/*=========== Heading ===========*/}
-        <h3 className="text-2xl font-medium">
-          Explore the Most Popular Genres
-        </h3>
+      {/*=========== Loading State ===========*/}
+      {loadingState && <Loader />}
 
-        {/*=========== Loading State ===========*/}
-        {loadingState && <Loader />}
+      {!error && !loadingState && topGenres && (
+        <Container>
+          {/*=========== Heading ===========*/}
+          <h3 className="text-2xl font-medium">
+            Explore the Most Popular Genres
+          </h3>
 
-        {/*=========== BentoGrid ===========*/}
-        {!error && !loadingState && topGenres && (
+          {/*=========== BentoGrid ===========*/}
           <ul className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-7 md:grid-rows-2 mt-6">
             {topGenres?.map((topGenre) => (
               <BentoCard key={topGenre.id} topGenre={topGenre} />
             ))}
           </ul>
-        )}
-      </Container>
+        </Container>
+      )}
     </section>
   );
 }

@@ -23,7 +23,12 @@ export interface FetchGameProps {
   ordering?: string;
 }
 
-export async function fetchGames({ page, pageSize, filters }: FetchGameProps) {
+export async function fetchGames({
+  page,
+  pageSize,
+  filters,
+  ordering,
+}: FetchGameProps) {
   try {
     const apiKey = process.env.NEXT_PUBLIC_RAWG_API;
     const baseURL = "https://api.rawg.io/api/games";
@@ -46,6 +51,11 @@ export async function fetchGames({ page, pageSize, filters }: FetchGameProps) {
     }
     if (filters.genre?.length) params.set("genres", filters.genre.join(","));
     if (filters.tag?.length) params.set("tags", filters.tag.join(","));
+
+    // ========= Ordering =========//
+    if (ordering) {
+      params.set("ordering", ordering);
+    }
 
     //========= Final URL =========//
     const url = `${baseURL}?${params.toString()}`;
